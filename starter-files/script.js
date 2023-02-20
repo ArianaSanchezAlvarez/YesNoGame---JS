@@ -20,4 +20,7 @@ const fetchAnswer = () => {
         .then(data => data.json())
         .then(data => showAnswer(data.answer));
 };
-fetchAnswer();
+
+document.querySelector('#button').addEventListener('click', () => {
+    fetchAnswer();
+});
