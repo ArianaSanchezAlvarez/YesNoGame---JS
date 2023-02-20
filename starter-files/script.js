@@ -6,6 +6,9 @@ const inputSelector = document.querySelector('#input');
 // API
 const API_ENDPOINT = 'https://yesno.wtf/api';
 
+//FLAG
+let isRequestInProgress = false;
+
 /**
  * STEPS:
  *
@@ -25,6 +28,7 @@ const cleanupResponses = () => {
     setTimeout(() => {
         document.querySelector('#answer').innerHTML = '';
         inputSelector.value = '';
+        isRequestInProgress = false;
     }, 3000);
 }
 
@@ -37,6 +41,7 @@ const showAnswer = answer => {
 };
 
 const fetchAnswer = () => {
+    isRequestInProgress = true;
     disableButton();
     ballSelector.classList.add('shake__ball');
 
@@ -46,10 +51,10 @@ const fetchAnswer = () => {
 };
 
 const handleKeyEnter = e => {
+    if(isRequestInProgress) return;
     if(!inputSelector.value) return;
-    if(e.keyCode === 13){
-        fetchAnswer();
-    }
+
+    fetchAnswer();
 }
 
 buttonSelector.addEventListener('click', () => {
