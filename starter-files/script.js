@@ -14,10 +14,19 @@ const API_ENDPOINT = 'https://yesno.wtf/api';
  * 5. Optional: add loading/error states
  *
  */
+
+const cleanupResponses = () => {
+    setTimeout(() => {
+        document.querySelector('#answer').innerHTML = '';
+        document.querySelector('#input').value = '';
+    }, 3000);
+}
+
 const showAnswer = answer => {
     setTimeout(() => {
         document.querySelector('#answer').innerHTML = `<p>${answer}</p>`;
         ballSelector.classList.remove('shake__ball');
+        cleanupResponses();
     }, 1000);
 };
 
