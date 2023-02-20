@@ -11,3 +11,10 @@ const API_ENDPOINT = 'https://yesno.wtf/api';
  * 5. Optional: add loading/error states
  *
  */
+
+const fetchAnswer = () => {
+    fetch(API_ENDPOINT)
+    .then(data => data.json())
+    .then(data => console.log(data));
+};
+fetchAnswer();
