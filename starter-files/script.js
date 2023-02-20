@@ -1,3 +1,6 @@
+//SELECTORS
+const ballSelector = document.querySelector('#ball');
+
 // API
 const API_ENDPOINT = 'https://yesno.wtf/api';
 
@@ -14,12 +17,12 @@ const API_ENDPOINT = 'https://yesno.wtf/api';
 const showAnswer = answer => {
     setTimeout(() => {
         document.querySelector('#answer').innerHTML = `<p>${answer}</p>`;
-        document.querySelector('#ball').classList.remove('shake__ball');
+        ballSelector.classList.remove('shake__ball');
     }, 1000);
 };
 
 const fetchAnswer = () => {
-    document.querySelector('#ball').classList.add('shake__ball');
+    ballSelector.classList.add('shake__ball');
     fetch(API_ENDPOINT)
         .then(data => data.json())
         .then(data => showAnswer(data.answer));
