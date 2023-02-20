@@ -1,5 +1,7 @@
 //SELECTORS
 const ballSelector = document.querySelector('#ball');
+const buttonSelector = document.querySelector('#button');
+const inputSelector = document.querySelector('#input');
 
 // API
 const API_ENDPOINT = 'https://yesno.wtf/api';
@@ -15,10 +17,14 @@ const API_ENDPOINT = 'https://yesno.wtf/api';
  *
  */
 
+const disableButton = () => {
+    buttonSelector.setAttribute('disabled', 'disabled');
+}
+
 const cleanupResponses = () => {
     setTimeout(() => {
         document.querySelector('#answer').innerHTML = '';
-        document.querySelector('#input').value = '';
+        inputSelector.value = '';
     }, 3000);
 }
 
@@ -31,18 +37,21 @@ const showAnswer = answer => {
 };
 
 const fetchAnswer = () => {
+    disableButton();
     ballSelector.classList.add('shake__ball');
+
     fetch(API_ENDPOINT)
         .then(data => data.json())
         .then(data => showAnswer(data.answer));
 };
 
 const handleKeyEnter = e => {
+    if(!inputSelector.value) return;
     if(e.keyCode === 13){
         fetchAnswer();
     }
 }
 
-document.querySelector('#button').addEventListener('click', () => {
+buttonSelector.addEventListener('click', () => {
     fetchAnswer();
 });
