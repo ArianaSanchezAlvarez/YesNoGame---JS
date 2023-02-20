@@ -12,14 +12,24 @@ const API_ENDPOINT = 'https://yesno.wtf/api';
  *
  */
 const showAnswer = answer => {
-    document.querySelector('#answer').innerHTML = `<p>${answer}</p>`;
+    setTimeout(() => {
+        document.querySelector('#answer').innerHTML = `<p>${answer}</p>`;
+        document.querySelector('#ball').classList.remove('shake__ball');
+    }, 1000);
 };
 
 const fetchAnswer = () => {
+    document.querySelector('#ball').classList.add('shake__ball');
     fetch(API_ENDPOINT)
         .then(data => data.json())
         .then(data => showAnswer(data.answer));
 };
+
+const handleKeyEnter = e => {
+    if(e.keyCode === 13){
+        fetchAnswer();
+    }
+}
 
 document.querySelector('#button').addEventListener('click', () => {
     fetchAnswer();
